@@ -7,4 +7,5 @@ public class Restaurant
     public string Phone { get; set; } = null!;
     public RestaurantDetail? RestaurantDetail { get; set; }
     public ICollection<Category> Categories { get; set; }
+    public ICollection<Product> Products { get; set; }
 }

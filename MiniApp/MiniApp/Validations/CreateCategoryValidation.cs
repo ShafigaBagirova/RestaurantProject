@@ -1,19 +1,31 @@
 ﻿using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using MiniApp.Data.Entities;
+using MiniApp.Data.Contexts;
+using MiniApp.Dtos;
 
 namespace MiniApp.Validations;
 
-public class CreateCategoryValidation : AbstractValidator<Category>
+public class CreateCategoryValidation : AbstractValidator<CreateCategoryRequest>
 {
-    public CreateCategoryValidation()
+    public CreateCategoryValidation(RestaurantDbContext dbContext)
     {
         RuleFor(x => x.Name)
             .NotEmpty()
             .WithMessage("Category name is required.")
             .MaximumLength(100)
             .WithMessage("Category name must not exceed 100 characters.")
-            .MinimumLength(2)
-            .WithMessage("Category name must be at least 2 characters long.");
+            .MustAsync(async (name, cancellation) =>
+            {
+                if (string.IsNullOrWhiteSpace(name))
+                    return true;
+
+                var exists = await dbContext.Category
+                    .AnyAsync(r => r.Name.ToLower() == name.ToLower(), cancellation);
+                return !exists;
+            })
+            .WithMessage("A Category with this name already exists. Category names must be unique.");
+
 
         RuleFor(x => x.Description)
             .MaximumLength(500)

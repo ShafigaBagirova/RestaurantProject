@@ -1,9 +1,10 @@
 using FluentValidation;
 using MiniApp.Data.Entities;
+using MiniApp.Dtos;
 
 namespace MiniApp.Validations;
 
-public class CreateRestaurantDetailValidation : AbstractValidator<RestaurantDetail>
+public class CreateRestaurantDetailValidation : AbstractValidator<CreateRestaurantDetailRequest>
 {
     public CreateRestaurantDetailValidation()
     {

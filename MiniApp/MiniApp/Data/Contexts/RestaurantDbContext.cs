@@ -18,6 +18,7 @@ public class RestaurantDbContext:DbContext
     {
         modelBuilder.ApplyConfiguration(new RestaurantConfiguration());
         modelBuilder.ApplyConfiguration(new RestaurantDetailConfiguration());
+        modelBuilder.ApplyConfiguration(new CategoryConfiguration()); 
         base.OnModelCreating(modelBuilder);
     }
     public DbSet<Restaurant> Restaurant { get; set; } 

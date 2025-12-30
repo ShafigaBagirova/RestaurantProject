@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace MiniApp.Dtos;
 
-namespace MiniApp.Dtos
+public class CreateCategoryRequest
 {
-    internal class CreateCategoryRequest
-    {
-    }
+    public string Name { get; set; } = null!;
+    public string Description { get; set; } 
+
 }

@@ -15,5 +15,8 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
                .HasMaxLength(100);
         builder.Property(c => c.Description)
             .HasMaxLength(500);
+        builder.HasMany(c => c.Restaurants)
+               .WithMany(r => r.Categories)
+               .UsingEntity(j => j.ToTable("RestaurantCategory"));
     }
 }

@@ -20,10 +20,12 @@ public class RestaurantDbContext:DbContext
         modelBuilder.ApplyConfiguration(new RestaurantDetailConfiguration());
         modelBuilder.ApplyConfiguration(new CategoryConfiguration()); 
         modelBuilder.ApplyConfiguration(new ProductConfiguration());
+        modelBuilder.ApplyConfiguration(new MenuConfiguration());
         base.OnModelCreating(modelBuilder);
     }
     public DbSet<Restaurant> Restaurant { get; set; } 
     public DbSet<RestaurantDetail> RestaurantDetail { get; set; }
     public DbSet<Category> Category { get; set; }
     public DbSet<Product> Product { get; set; }
+    public DbSet<Menu> Menu { get; set; }
 }

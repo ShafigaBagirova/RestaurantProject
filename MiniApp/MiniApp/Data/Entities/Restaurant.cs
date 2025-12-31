@@ -8,4 +8,6 @@ public class Restaurant
     public RestaurantDetail? RestaurantDetail { get; set; }
     public ICollection<Category> Categories { get; set; }
     public ICollection<Product> Products { get; set; }
+    public int MenuId { get; set; }
+    public Menu Menu { get; set; }
 }

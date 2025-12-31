@@ -7,5 +7,6 @@ public class Category
     public string Description { get; set; }
     public ICollection<Restaurant> Restaurants { get; set; }
     public ICollection<Product> Products { get; set; }
+    public ICollection<Menu> Menus { get; set; }
 
 }

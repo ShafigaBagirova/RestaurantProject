@@ -1,6 +1,6 @@
 ﻿namespace MiniApp.Dtos;
 
-public class GetProductRequest
+public class GetByIdProductDto
 {
     public int Id { get; set; }
     public string ProductName { get; set; }

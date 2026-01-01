@@ -28,7 +28,7 @@ public class StaffConfiguration : IEntityTypeConfiguration<Staff>
                 .IsUnique();
         builder.Property(s => s.Age)
                 .IsRequired();
-        builder.ToTable(t => t.HasCheckConstraint("CK_Staff_Age", "Age >= 18"));
+        builder.ToTable(t => t.HasCheckConstraint( "CK_Staff_Age", "\"Age\" >= 18"  ));
         builder.HasMany(s => s.Restaurants)
             .WithMany(r => r.Staffs)
             .UsingEntity<Dictionary<string, object>>(

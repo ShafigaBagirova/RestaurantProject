@@ -13,7 +13,7 @@ public class DiningTableConfiguration : IEntityTypeConfiguration<DiningTable>
             .IsRequired();
         builder.Property(dt => dt.Capacity)
             .IsRequired();
-        builder.ToTable(t=>t.HasCheckConstraint("CK_DiningTable_Capacity", "Capacity > 0"));
+        builder.ToTable(t=>t.HasCheckConstraint("CK_DiningTable_Capacity", "\"Capacity\" > 0"));
         builder.Property(dt => dt.IsActive)
             .IsRequired()
             .HasDefaultValue(true);

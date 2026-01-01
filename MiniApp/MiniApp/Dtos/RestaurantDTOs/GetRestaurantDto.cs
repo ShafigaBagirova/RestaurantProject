@@ -1,5 +1,7 @@
 ﻿using MiniApp.Dtos.CategoryDTOs;
+using MiniApp.Dtos.DiningTableDTOs;
 using MiniApp.Dtos.ProductDTOs;
+using MiniApp.Dtos.StaffDTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;

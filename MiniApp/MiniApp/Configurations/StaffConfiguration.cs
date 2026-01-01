@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MiniApp.Data.Entities;
 
 namespace MiniApp.Configurations;
 
 public class StaffConfiguration : IEntityTypeConfiguration<Staff>
 {
-    [Obsolete]
-    public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Staff> builder)
+    public void Configure(EntityTypeBuilder<Staff> builder)
     {
         builder.ToTable("Staff");
         builder.HasKey(s => s.Id);
@@ -28,7 +28,7 @@ public class StaffConfiguration : IEntityTypeConfiguration<Staff>
                 .IsUnique();
         builder.Property(s => s.Age)
                 .IsRequired();
-        builder.HasCheckConstraint("CK_Staff_Age", "Age >= 18");
+        builder.ToTable(t => t.HasCheckConstraint("CK_Staff_Age", "Age >= 18"));
         builder.HasMany(s => s.Restaurants)
             .WithMany(r => r.Staffs)
             .UsingEntity<Dictionary<string, object>>(

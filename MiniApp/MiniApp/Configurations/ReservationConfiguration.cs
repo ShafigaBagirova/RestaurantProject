@@ -20,13 +20,15 @@ public class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
             .IsUnique();
         builder.Property(r => r.GuestCount)
             .IsRequired();
-        builder.HasCheckConstraint("CK_Reservations_GuestCount", "GuestCount > 0");
+        builder.ToTable(t => t.HasCheckConstraint("CK_Reservations_GuestCount", "GuestCount > 0"));
         builder.Property(r => r.ReservationDate)
             .IsRequired();
-        builder.HasCheckConstraint("CK_ReservationDate_Future", "[ReservationDate] >= GETDATE()");
+        builder.ToTable(t => t.HasCheckConstraint("CK_ReservationDate_Future", "[ReservationDate] >= GETDATE()"));
         builder.Property(r => r.CreatedAt)
             .IsRequired()
             .HasDefaultValueSql("GETDATE()");
+        builder.Property(r => r.DiningTableId)
+            .IsRequired();
         builder.HasOne(r => r.DiningTable)
             .WithMany(dt => dt.Reservations)
             .HasForeignKey(r => r.DiningTableId)

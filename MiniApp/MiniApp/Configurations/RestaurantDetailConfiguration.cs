@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MiniApp.Data.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,13 +9,15 @@ namespace MiniApp.Configurations;
 
 public class RestaurantDetailConfiguration : IEntityTypeConfiguration<RestaurantDetail>
 {
-    public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<RestaurantDetail> builder)
+    public void Configure(EntityTypeBuilder<RestaurantDetail> builder)
     {
         builder.ToTable("RestaurantDetail");
         builder.HasKey(rd => rd.Id);
         builder.Property(rd => rd.Address)
             .IsRequired()
             .HasMaxLength(200);
+        builder.HasIndex(rd=>rd.Address)
+            .IsUnique();
         builder.Property(rd => rd.Cuisine)
             .IsRequired()
             .HasMaxLength(100);

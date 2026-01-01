@@ -18,5 +18,7 @@ public class RestaurantConfiguration : IEntityTypeConfiguration<Restaurant>
             builder.Property(r => r.Phone)
                 .IsRequired()
                 .HasMaxLength(20);
+        builder.HasIndex(r=> r.Phone)
+                .IsUnique();
     }
 }

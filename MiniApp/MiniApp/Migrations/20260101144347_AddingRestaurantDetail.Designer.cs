@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MiniApp.Data.Contexts;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MiniApp.Migrations
 {
     [DbContext(typeof(RestaurantDbContext))]
-    partial class RestaurantDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260101144347_AddingRestaurantDetail")]
+    partial class AddingRestaurantDetail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -124,9 +127,6 @@ namespace MiniApp.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)");
 
-                    b.Property<int?>("MenuId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -138,8 +138,6 @@ namespace MiniApp.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("MenuId");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -398,10 +396,6 @@ namespace MiniApp.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("MiniApp.Data.Entities.Menu", null)
-                        .WithMany("Products")
-                        .HasForeignKey("MenuId");
-
                     b.Navigation("Category");
                 });
 
@@ -503,8 +497,6 @@ namespace MiniApp.Migrations
 
             modelBuilder.Entity("MiniApp.Data.Entities.Menu", b =>
                 {
-                    b.Navigation("Products");
-
                     b.Navigation("Restaurants");
                 });
 

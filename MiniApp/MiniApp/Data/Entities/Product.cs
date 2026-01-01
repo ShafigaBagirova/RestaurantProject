@@ -9,4 +9,5 @@ public class Product
     public int CategoryId { get; set; }
     public Category Category { get; set; }
     public ICollection<Restaurant> Restaurants { get; set; }
+    public ICollection<Menu> Menus { get; set; }
 }

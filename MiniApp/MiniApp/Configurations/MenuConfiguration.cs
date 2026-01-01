@@ -16,10 +16,17 @@ public class MenuConfiguration : IEntityTypeConfiguration<Menu>
          "MenuCategory",
          j => j.HasOne<Category>().WithMany().HasForeignKey("CategoryId").OnDelete(DeleteBehavior.Restrict),
          j => j.HasOne<Menu>().WithMany().HasForeignKey("MenuId").OnDelete(DeleteBehavior.Restrict));
-        builder.HasMany(m=> m.Restaurants)
-            .WithOne(r => r.Menu)
-            .HasForeignKey("RestaurantId")
-            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasMany(m=>m.Products)
+            .WithMany(p=>p.Menus)
+            .UsingEntity<Dictionary<string, object>>(
+                "MenuProduct",
+                j => j.HasOne<Product>().WithMany().HasForeignKey("ProductId").OnDelete(DeleteBehavior.Restrict),
+                j => j.HasOne<Menu>().WithMany().HasForeignKey("MenuId").OnDelete(DeleteBehavior.Restrict));
+        builder.HasMany(m=>m.Restaurants)
+            .WithOne(r=>r.Menu)
+          .OnDelete(DeleteBehavior.Restrict);
+
 
     }
 }

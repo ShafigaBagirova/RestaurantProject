@@ -132,7 +132,7 @@ Restaurant restaurant = new Restaurant
     Name = createdrestaurantrequest.Name,
     Phone= createdrestaurantrequest.Phone,
     MenuId= createdrestaurantrequest.MenuId,    
-    Restaurantdetail= new RestaurantDetail
+    RestaurantDetail= new RestaurantDetail
     {
         City= createdrestaurantrequest.City,
          Cuisine= createdrestaurantrequest.Cuisine,
@@ -142,12 +142,7 @@ Restaurant restaurant = new Restaurant
 //_context.Restaurant.Add(restaurant);
 //_context.SaveChanges();
 
-//var existingMenu = _context.Menu.FirstOrDefault(m => m.Id == 1);
 
-//if (existingMenu == null)
-//{
-//    throw new Exception("Menu with Id=1 does not exist!");
-//}
 
 //_context.Menu.Attach(existingMenu);
 //var restaurant1 = new Restaurant
@@ -267,4 +262,20 @@ Reservation reservation = new Reservation
 //    {
 //        Console.WriteLine($"Works at Restaurant: {res.Name}");
 //    }
+//}
+//var existingMenu = _context.Menu.FirstOrDefault(m => m.Id == 1);
+
+//if (existingMenu == null)
+//{
+//    throw new Exception("Menu with Id=1 does not exist!");
+//}
+//var updaterestaurantrequest = new
+//{
+//  MenuId=existingMenu.Id
+//};
+//var restaurantToUpdate = _context.Restaurant.FirstOrDefault(r => r.Id == 8);
+//if (restaurantToUpdate != null)
+//{
+//    restaurantToUpdate.MenuId = updaterestaurantrequest.MenuId;
+//    _context.SaveChanges();
 //}

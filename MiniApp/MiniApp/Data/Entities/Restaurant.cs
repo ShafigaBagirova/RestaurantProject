@@ -10,4 +10,6 @@ public class Restaurant
     public ICollection<Product> Products { get; set; }
     public int MenuId { get; set; }
     public Menu Menu { get; set; }
+    public ICollection<Staff> Staffs { get; set; }
+    public ICollection<DiningTable> DiningTables { get; set; }
 }

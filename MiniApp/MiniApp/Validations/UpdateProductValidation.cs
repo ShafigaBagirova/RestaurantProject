@@ -67,3 +67,4 @@ public class UpdateProductValidation : AbstractValidator<UpdateProductRequest>
 }
 
 
+

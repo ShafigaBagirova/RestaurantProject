@@ -39,3 +39,4 @@ public class UpdateRestaurantDetailRequestValidation : AbstractValidator<UpdateR
 }
 
 
+

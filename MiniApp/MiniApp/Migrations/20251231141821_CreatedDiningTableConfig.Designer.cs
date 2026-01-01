@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MiniApp.Data.Contexts;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MiniApp.Migrations
 {
     [DbContext(typeof(RestaurantDbContext))]
-    partial class RestaurantDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251231141821_CreatedDiningTableConfig")]
+    partial class CreatedDiningTableConfig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -156,9 +159,6 @@ namespace MiniApp.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("DiningTableId")
-                        .HasColumnType("integer");
-
                     b.Property<int>("GuestCount")
                         .HasColumnType("integer");
 
@@ -166,8 +166,6 @@ namespace MiniApp.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DiningTableId");
 
                     b.ToTable("Reservation");
                 });
@@ -354,17 +352,6 @@ namespace MiniApp.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("MiniApp.Data.Entities.Reservation", b =>
-                {
-                    b.HasOne("MiniApp.Data.Entities.DiningTable", "DiningTable")
-                        .WithMany("Reservations")
-                        .HasForeignKey("DiningTableId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("DiningTable");
-                });
-
             modelBuilder.Entity("MiniApp.Data.Entities.Restaurant", b =>
                 {
                     b.HasOne("MiniApp.Data.Entities.Menu", "Menu")
@@ -437,11 +424,6 @@ namespace MiniApp.Migrations
             modelBuilder.Entity("MiniApp.Data.Entities.Category", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("MiniApp.Data.Entities.DiningTable", b =>
-                {
-                    b.Navigation("Reservations");
                 });
 
             modelBuilder.Entity("MiniApp.Data.Entities.Menu", b =>

@@ -28,4 +28,7 @@ public class RestaurantDbContext:DbContext
     public DbSet<Category> Category { get; set; }
     public DbSet<Product> Product { get; set; }
     public DbSet<Menu> Menu { get; set; }
-}
+    public DbSet<Staff> Staffs{ get; set; }
+    public DbSet<Reservation> Reservation { get; set; }
+    public DbSet<DiningTable> DiningTable { get; set; }
+ }

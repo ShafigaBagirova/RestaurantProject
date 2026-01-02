@@ -32,6 +32,10 @@ public class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
         builder.HasOne(r => r.DiningTable)
             .WithMany(dt => dt.Reservations)
             .HasForeignKey(r => r.DiningTableId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
+        builder.HasOne(r => r.Restaurant)
+            .WithMany(r => r.Reservations)
+            .HasForeignKey(r => r.RestaurantId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

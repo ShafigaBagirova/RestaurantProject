@@ -12,4 +12,5 @@ public class Restaurant
     public Menu? Menu { get; set; }
     public ICollection<Staff> Staffs { get; set; }
     public ICollection<DiningTable> DiningTables { get; set; }
-}
+    public ICollection<Reservation> Reservations { get; set; }
+    }

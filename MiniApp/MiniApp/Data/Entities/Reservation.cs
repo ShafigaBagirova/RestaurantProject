@@ -10,4 +10,6 @@ public class Reservation
     public DateTime CreatedAt { get; set; }
     public int DiningTableId { get; set; }
     public DiningTable DiningTable { get; set; }
+   public int? RestaurantId { get; set; }
+    public Restaurant? Restaurant { get; set; }
 }

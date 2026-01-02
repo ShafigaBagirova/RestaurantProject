@@ -23,7 +23,7 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.HasOne(p => p.Category)
                .WithMany(c => c.Products)
                .HasForeignKey(p => p.CategoryId)
-               .OnDelete(DeleteBehavior.Restrict);
+               .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasMany(p => p.Restaurants)
                .WithMany(r => r.Products)
@@ -33,12 +33,12 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
                          .WithMany()
                          .HasForeignKey("RestaurantId")
                          .HasConstraintName("FK_ProductRestaurant_Restaurants_RestaurantId")
-                         .OnDelete(DeleteBehavior.Restrict),
+                         .OnDelete(DeleteBehavior.Cascade),
                    j => j.HasOne<Product>()
                          .WithMany()
                          .HasForeignKey("ProductId")
                          .HasConstraintName("FK_ProductRestaurant_Products_ProductId")
-                         .OnDelete(DeleteBehavior.Restrict));
+                         .OnDelete(DeleteBehavior.Cascade));
 
     }
 }

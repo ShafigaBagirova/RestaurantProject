@@ -38,13 +38,13 @@ public class StaffConfiguration : IEntityTypeConfiguration<Staff>
                     .WithMany()
                     .HasForeignKey("RestaurantId")
                     .HasConstraintName("FK_StaffRestaurant_Restaurant")
-                    .OnDelete(DeleteBehavior.Restrict),
+                    .OnDelete(DeleteBehavior.Cascade),
                 j => j
                     .HasOne<Staff>()
                     .WithMany()
                     .HasForeignKey("StaffId")
                     .HasConstraintName("FK_StaffRestaurant_Staff")
-                    .OnDelete(DeleteBehavior.Restrict),
+                    .OnDelete(DeleteBehavior.Cascade),
                 j =>
                 {
                     j.HasKey("StaffId", "RestaurantId");

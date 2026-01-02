@@ -24,11 +24,11 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
               j => j.HasOne<Restaurant>()
                     .WithMany()
                     .HasForeignKey("RestaurantId")
-                    .OnDelete(DeleteBehavior.Restrict),
+                    .OnDelete(DeleteBehavior.Cascade),
               j => j.HasOne<Category>()
                     .WithMany()
                     .HasForeignKey("CategoryId")
-                    .OnDelete(DeleteBehavior.Restrict),
+                    .OnDelete(DeleteBehavior.Cascade),
               j => j.ToTable("RestaurantCategory"));
 
     }

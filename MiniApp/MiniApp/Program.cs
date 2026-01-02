@@ -4,278 +4,256 @@ using Microsoft.EntityFrameworkCore;
 using MiniApp.Data.Contexts;
 using MiniApp.Data.Entities;
 using MiniApp.Dtos.RestaurantDTOs;
+using MiniApp.Migrations;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 
 Console.WriteLine("Hello, World!");
-
 RestaurantDbContext _context = new ();
-
-var createdcategoryrequest = new 
+while (true)
 {
-    Name="Fast Food",
-    Description= "Fast food items"
-};
+    Console.Clear();
+    Console.WriteLine("--- Main Menu ---");
+    Console.WriteLine("1. Add Restaurant");
+    Console.WriteLine("2. List Restaurants");
+    Console.WriteLine("3. Delete Restaurant");
+    Console.WriteLine("4. Add Dining Table");
+    Console.WriteLine("5.List Dining Tables");
+    Console.WriteLine("6.Delete Dining Table");
+    Console.WriteLine("7.Add Reservation");
+    Console.WriteLine("8.List Reservations");
+    Console.WriteLine("9.Delete Reservation");
+    Console.WriteLine("10.Update Reservation");
+    Console.WriteLine("0. Exit"); 
+    Console.Write("Choose an option: ");
 
-Category category = new Category
-{
-    Name = createdcategoryrequest.Name,
-    Description=createdcategoryrequest.Description
-
-};
-
-var createdcategoryrequest2 = new
-{
-    Name= "Soups",
-    Description= "Various kinds of soups"
-};
-
-Category category2 = new Category
-{
-    Name = createdcategoryrequest2.Name,
-    Description = createdcategoryrequest2.Description
-};
-
-var createdcategoryrequest3 = new
-{
-    Name = "Desserts",
-    Description = "Sweet desserts"
-};
-Category category3 = new Category
-{
-    Name = createdcategoryrequest3.Name,
-    Description = createdcategoryrequest3.Description
-};
-
-//_context.Category.AddRange(category2,category3);
-//_context.SaveChanges();
-
-var createtproductrequest = new
-{
-    Name = "Burger",
-    Description = "Delicious beef burger",
-    Price = 5.99m,
-    CategoryId=3
-};
-
-Product product = new Product
-{
-    Name = createtproductrequest.Name,
-    Description = createtproductrequest.Description,
-    Price = createtproductrequest.Price,
-    CategoryId= createtproductrequest.CategoryId
-};
-
-var createdproductrequest2= new
-{
-    Name = "Chicken Soup",
-    Description = "Warm chicken soup",
-    Price = 3.99m,
-    CategoryId=4
-};
-
-Product product2 = new Product
-{
-    Name = createdproductrequest2.Name,
-    Description = createdproductrequest2.Description,
-    Price = createdproductrequest2.Price,
-    CategoryId= createdproductrequest2.CategoryId
-};
-
-var createdproductrequest3 = new
-{
-    Name = "Ice Cream",
-    Description = "Vanilla ice cream",
-    Price = 2.99m,
-    CategoryId=5
-};
-
-Product product3 = new Product
-{
-    Name = createdproductrequest3.Name,
-    Description = createdproductrequest3.Description,
-    Price = createdproductrequest3.Price,
-    CategoryId= createdproductrequest3.CategoryId
-};
-
-//_context.Product.AddRange(product,product2,product3);
-//_context.SaveChanges();
-
-var c1=_context.Category.Find(3);
-var c2=_context.Category.Find(4);
-var c3=_context.Category.Find(5);
-var p1=_context.Product.Find(3);
-var p2=_context.Product.Find(4);
-var p3=_context.Product.Find(5);
-
-Menu menu = new Menu
-{
-    Categories =  new List<Category> { c1, c2, c3 },
-    Products = new List<Product> { p1, p2, p3 }
-
-};
-//_context.Menu.Add(menu);
-//_context.SaveChanges();
-//var m1=_context.Menu.Find(1);
-//Console.WriteLine("found");
-var createdrestaurantrequest = new
-{
-    Name = "Food Haven",
-    Address = "123 Main St",
-    Phone = "555-1234",
-    MenuId=1,
-    City= "Metropolis",
-    Cuisine= "International"
-};
-
-Restaurant restaurant = new Restaurant
-{
-    Name = createdrestaurantrequest.Name,
-    Phone= createdrestaurantrequest.Phone,
-    MenuId= createdrestaurantrequest.MenuId,    
-    RestaurantDetail= new RestaurantDetail
+    var input = Console.ReadLine();
+    switch (input)
     {
-        City= createdrestaurantrequest.City,
-         Cuisine= createdrestaurantrequest.Cuisine,
-        Address = createdrestaurantrequest.Address,
+        case "1": AddRestaurant(_context); 
+            break;
+        case "2": ListRestaurants(_context); 
+            break;
+        case "3": DeleteRestaurant(_context);
+            break;
+        case "4": AddDiningTable(_context);
+            break;
+        case "5": ListDiningTables(_context);
+            break;
+        case "6": DeleteDiningTable(_context);
+            break;
+        case "7": AddReservation(_context);
+            break;
+        case "8": ListReservations(_context);
+            break;
+        case "9": DeleteReservation(_context);
+            break;
+        case "10": UpdateReservation(_context);
+            break;
+        case "0": return;
+        default: Console.WriteLine("Invalid option!"); break;
     }
-};
-//_context.Restaurant.Add(restaurant);
-//_context.SaveChanges();
 
+    Console.WriteLine("Press Enter to continue...");
+    Console.ReadLine();
+}
 
-
-//_context.Menu.Attach(existingMenu);
-//var restaurant1 = new Restaurant
-//{
-//    Name = "Central Baku",
-//    Phone = "555-1256",
-//    Menu = existingMenu,
-//    MenuId = existingMenu.Id,
-//    RestaurantDetail = new RestaurantDetail
-//    {
-//        Address = "126 Main St",
-//        City = "Baku",
-//        Cuisine = "International"
-//    }
-//};
-
-//_context.Restaurant.Add(restaurant1);
-//_context.SaveChanges();
-//var r1=_context.Restaurant.Find(8);
-//var createdstaffrequest = new
-//{
-//    FullName = "John Doe",
-//    Position = "Chef",
-//    Email="jd@gmail.com",
-//    Age=26,
-//    Phone="555-6789",
-//    Restaurant =new List<Restaurant> { r1 }
-//};
-
-//Staff staff = new Staff
-//{
-//    FullName = createdstaffrequest.FullName,
-//    Position = createdstaffrequest.Position,
-//    Restaurants = createdstaffrequest.Restaurant,
-//    Email= createdstaffrequest.Email,
-//    Age= createdstaffrequest.Age,
-//    Phone= createdstaffrequest.Phone
-//};
-//_context.Staffs.Add(staff);
-//_context.SaveChanges();
-var r1=_context.Restaurant.Find(8);
-var createddiningtablerequest = new
+void AddRestaurant(RestaurantDbContext _context)
 {
-    TableNumber = 10,
-    Capacity = 4,
-    IsAvailable = true,
-    RestaurantId=r1.Id
-};
+    Console.Write("Name: "); var name = Console.ReadLine()!;
+    Console.Write("Phone: "); var phone = Console.ReadLine()!;
+    Console.Write("Address: "); var address = Console.ReadLine()!;
+    Console.Write("City: "); var city = Console.ReadLine()!;
+    Console.Write("Cuisine: "); var cuisine = Console.ReadLine()!;
+    Console.Write("Menu Id: "); int.TryParse(Console.ReadLine(), out int menuId);
 
-DiningTable diningTable = new DiningTable
+    var restaurant = new Restaurant
+    {
+        Name = name,
+        Phone = phone,
+        MenuId = menuId,
+        RestaurantDetail = new RestaurantDetail
+        {
+            Address = address,
+            City = city,
+            Cuisine = cuisine
+        }
+    };
+
+    _context.Restaurant.Add(restaurant);
+    _context.SaveChanges();
+    Console.WriteLine("Restaurant added successfully!");
+}
+
+void ListRestaurants(RestaurantDbContext _context)
 {
-    DiningTableNumber = createddiningtablerequest.TableNumber,
-    Capacity = createddiningtablerequest.Capacity,
-    IsActive = createddiningtablerequest.IsAvailable,
-    RestaurantId= createddiningtablerequest.RestaurantId
-};
-//_context.DiningTable.Add(diningTable);
-//_context.SaveChanges();
-var dt1=_context.DiningTable.Find(1);
-var createdreservationrequest = new
+    var restaurants = _context.Restaurant.Include(r => r.RestaurantDetail).ToList();
+    if (!restaurants.Any()) 
+    { 
+        Console.WriteLine("No restaurants found.");
+        return;
+    }
+    foreach (var r in restaurants)
+        Console.WriteLine($"Id: {r.Id}, Name: {r.Name}, Phone: {r.Phone}, Address: {r.RestaurantDetail.Address}, City: {r.RestaurantDetail.City}, Cuisine: {r.RestaurantDetail.Cuisine}, MenuId: {r.MenuId}");
+}
+
+void DeleteRestaurant(RestaurantDbContext _context)
 {
-    CustomerName = "Alice Smith",
-    ReservationTime = DateTime.UtcNow.AddHours(2),
-    NumberOfGuests = 4,
-    DiningTableId=dt1.Id,
-    CreatedAt=DateTime.UtcNow,
-    CustomerPhone= "555-9876"
-};
-Reservation reservation = new Reservation
+    Console.Write("Restaurant Id to delete: ");
+    if (int.TryParse(Console.ReadLine(), out int id))
+    {
+        var restaurant = _context.Restaurant.Include(r => r.RestaurantDetail).FirstOrDefault(r => r.Id == id);
+        if (restaurant != null)
+        {
+            _context.RestaurantDetail.Remove(restaurant.RestaurantDetail);
+            _context.Restaurant.Remove(restaurant);
+            _context.SaveChanges();
+            Console.WriteLine("Deleted!");
+        }
+        else Console.WriteLine("Not found.");
+    }
+}
+
+
+void AddDiningTable(RestaurantDbContext _context)
 {
-    CustomerName = createdreservationrequest.CustomerName,
-    ReservationDate = createdreservationrequest.ReservationTime,
-    GuestCount = createdreservationrequest.NumberOfGuests,
-    DiningTableId= createdreservationrequest.DiningTableId,
-    CreatedAt= createdreservationrequest.CreatedAt,
-    CustomerPhone= createdreservationrequest.CustomerPhone
+    Console.Write("DiningTableNumber: "); int.TryParse(Console.ReadLine(), out int tableNumber);
+    Console.Write("Capacity: "); int.TryParse(Console.ReadLine(), out int capacity);
+    Console.Write("IsActive (true/false): "); bool.TryParse(Console.ReadLine(), out bool isActive);
+    Console.Write("Restaurant Id: "); int.TryParse(Console.ReadLine(), out int restaurantId);
+    var diningTable = new DiningTable
+    {
+       DiningTableNumber = tableNumber,
+       Capacity = capacity,
+       IsActive = isActive,
+       RestaurantId = restaurantId
+    };
+    _context.DiningTable.Add(diningTable);
+    _context.SaveChanges();
+    Console.WriteLine("Dining Table added successfully!");
+}
+
+void ListDiningTables(RestaurantDbContext _context)
+{
+    var diningTables = _context.DiningTable.ToList();
+    if (!diningTables.Any())
+    {
+        Console.WriteLine("No dining tables found.");
+        return;
+    }
+    foreach (var dt in diningTables)
+    {
+
+        Console.WriteLine($"Id: {dt.Id}, DiningTableNumber: {dt.DiningTableNumber}, Capacity: {dt.Capacity}, IsActive: {dt.IsActive}, RestaurantId: {dt.RestaurantId}");
+    }
+}
+void DeleteDiningTable(RestaurantDbContext _context)
+{
+    Console.Write("Dining Table Id to delete: ");
+    if (int.TryParse(Console.ReadLine(), out int id))
+    {
+        var diningTable = _context.DiningTable.FirstOrDefault(dt => dt.Id == id);
+        if (diningTable != null)
+        {
+            _context.DiningTable.Remove(diningTable);
+            _context.SaveChanges();
+            Console.WriteLine("Deleted!");
+        }
+        else Console.WriteLine("Not found.");
+    }
+}
+
+void AddReservation (RestaurantDbContext context) 
+{
+    Console.Write("Customer Name: ");
+    var customerName = Console.ReadLine()!;
+    Console.Write("CustomerPhone: ");
+    var customerPhone=Console.ReadLine();
+    Console.Write("GuestCount: ");
+    int.TryParse(Console.ReadLine(), out int guestCount);
+    Console.Write("Reservation Date (yyyy-MM-dd HH:mm): ");
+    string inputDate = Console.ReadLine()!;
+    if (!DateTime.TryParseExact(inputDate, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime reservationDateLocal))
+    {
+        Console.WriteLine("Invalid date format. Use yyyy-MM-dd HH:mm");
+        return;
+    }
+    DateTime reservationDateUtc = DateTime.SpecifyKind(reservationDateLocal, DateTimeKind.Utc);
+    Console.Write("Dining Table Id: ");
+    int.TryParse(Console.ReadLine(), out int diningTableId);
+    Console.WriteLine("CreatedAt:");
+    DateTime createdAt = DateTime.UtcNow;
+
+    var reservation = new Reservation
+    {
+        CustomerName = customerName,
+        CustomerPhone = customerPhone,
+        GuestCount = guestCount,
+        ReservationDate = reservationDateUtc,
+        CreatedAt = createdAt,
+        DiningTableId = diningTableId
+    };
+    context.Reservation.Add(reservation);
+    context.SaveChanges();
+    Console.WriteLine("Reservation added successfully!");
 };
 
-//_context.Reservation.Add(reservation);
-//_context.SaveChanges();
+void ListReservations(RestaurantDbContext context)
+{
+    var reservations = context.Reservation.ToList();
+    if (!reservations.Any())
+    {
+        Console.WriteLine("No reservations found.");
+        return;
+    }
+    foreach (var r in reservations)
+    {
+        Console.WriteLine($"Id: {r.Id}, CustomerName: {r.CustomerName}, CustomerPhone: {r.CustomerPhone}, GuestCount: {r.GuestCount}, ReservationDate: {r.ReservationDate}, CreatedAt: {r.CreatedAt}, DiningTableId: {r.DiningTableId}");
+    }
+}
 
-//var result=_context.Reservation
-//    .Include(r=>r.DiningTable)
-//    .ThenInclude(dt=>dt.Restaurant)
-//    .ToList();
-//foreach (var res in result)
-//{
-//    Console.WriteLine($"Reservation for {res.CustomerName} at {res.ReservationDate}, Table Number: {res.DiningTable.DiningTableNumber}, Restaurant: {res.DiningTable.Restaurant.Name}");
-//}
+void DeleteReservation(RestaurantDbContext context)
+{
+    Console.Write("Reservation Id to delete: ");
+    if (int.TryParse(Console.ReadLine(), out int id))
+    {
+        var reservation = context.Reservation.FirstOrDefault(r => r.Id == id);
+        if (reservation != null)
+        {
+            context.Reservation.Remove(reservation);
+            context.SaveChanges();
+            Console.WriteLine("Deleted!");
+        }
+        else Console.WriteLine("Not found.");
+    }
+}
 
-//var result = _context.Restaurant
-//    .Include(r => r.Menu)
-//    .ThenInclude(m => m.Categories)
-//    .ThenInclude(c => c.Products)
-//    .ToList();
-
-//foreach (var res in result)
-//{
-//    Console.WriteLine($"Restaurant: {res.Name}");
-//    foreach (var categories in res.Menu.Categories)
-//    {
-//        Console.WriteLine($"Category: {categories.Name}");
-//        foreach (var products in categories.Products)
-//        {
-//            Console.WriteLine($"Product: {products.Name} - ${products.Price}");
-//        }
-//    }
-//}
-
-//var result = _context.Staffs
-//    .Include(s => s.Restaurants)
-//    .ToList();
-//foreach (var staff in result)
-//{
-//    Console.WriteLine($"Staff: {staff.FullName}, Position: {staff.Position}");
-//    foreach (var res in staff.Restaurants)
-//    {
-//        Console.WriteLine($"Works at Restaurant: {res.Name}");
-//    }
-//}
-//var existingMenu = _context.Menu.FirstOrDefault(m => m.Id == 1);
-
-//if (existingMenu == null)
-//{
-//    throw new Exception("Menu with Id=1 does not exist!");
-//}
-//var updaterestaurantrequest = new
-//{
-//  MenuId=existingMenu.Id
-//};
-//var restaurantToUpdate = _context.Restaurant.FirstOrDefault(r => r.Id == 8);
-//if (restaurantToUpdate != null)
-//{
-//    restaurantToUpdate.MenuId = updaterestaurantrequest.MenuId;
-//    _context.SaveChanges();
-//}
+void UpdateReservation(RestaurantDbContext context)
+{
+    Console.Write("Reservation Id to update: ");
+    if (int.TryParse(Console.ReadLine(), out int id))
+    {
+        var reservation = context.Reservation.FirstOrDefault(r => r.Id == id);
+        if (reservation != null)
+        {
+            Console.Write("Customer Name: ");
+            reservation.CustomerName = Console.ReadLine()!;
+            Console.Write("Customer Phone: ");
+            reservation.CustomerPhone = Console.ReadLine()!;
+            Console.Write("Guest Count: ");
+            int.TryParse(Console.ReadLine(), out int guestCount);
+            reservation.GuestCount = guestCount;
+            Console.Write("Reservation Date (yyyy-MM-dd HH:mm): ");
+            DateTime.TryParse(Console.ReadLine(), out DateTime reservationDate);
+            reservation.ReservationDate = reservationDate;
+            Console.Write("Dining Table Id: ");
+            int.TryParse(Console.ReadLine(), out int diningTableId);
+            reservation.DiningTableId = diningTableId;
+            context.SaveChanges();
+            Console.WriteLine("Updated!");
+        }
+        else Console.WriteLine("Not found.");
+    }
+}
